@@ -1,28 +1,19 @@
-import { useEffect, useState } from "react";
-import Container from "./components/Container";
-import Layout from "./components/Layout";
-import Navbar from "./components/Navbar";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+
+import { ContextProvider } from "./contexts";
+import NotFound from "./pages/NotFound";
+import PopularMovies from "./pages/PopularMovies";
 
 function App() {
-  const [movies, setMovies] = useState([]);
-
-  useEffect(() => {
-    (async function () {
-      const res = await fetch(`${process.env.REACT_APP_HOSTNAME}/movies`);
-      const {
-        result: { movies },
-      } = await res.json();
-      setMovies(movies);
-    })();
-  }, []);
-
   return (
-    <div className="bg-white">
-      <Navbar />
-      <Layout>
-        <Container data={movies} />
-      </Layout>
-    </div>
+    <ContextProvider>
+      <Router>
+        <Routes>
+          <Route path="/" element={<PopularMovies />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </Router>
+    </ContextProvider>
   );
 }
 

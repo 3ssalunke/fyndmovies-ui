@@ -1,14 +1,19 @@
-import { useState } from "react";
+import { useContext } from "react";
 import { FaSearch } from "react-icons/fa";
+import { GlobalContext } from "../contexts";
+import { clearSearchedMovies, setSearchedMovies } from "../contexts/actions";
+import debounce from "../helpers/debounce";
 
 const Search = () => {
-  const [input, setInput] = useState("");
+  const [, dispatch] = useContext(GlobalContext);
 
-  const handleSearch = (e) => {
-    setInput(e.target.value);
-    if (input.length >= 3) {
+  const handleSearch = debounce((e) => {
+    if (e.target.value) {
+      setSearchedMovies(dispatch, { searchText: e.target.value });
+    } else {
+      clearSearchedMovies(dispatch);
     }
-  };
+  }, 200);
 
   return (
     <form className="absolute cursor-pointer right-0">
