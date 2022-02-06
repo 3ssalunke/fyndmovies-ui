@@ -1,7 +1,16 @@
 import Search from "./Search";
 import logo from "../images/logo.png";
+import { Link, useNavigate } from "react-router-dom";
+import { clearToken, isAuthenticated } from "../helpers/token";
 
 const Navbar = () => {
+  const auth = isAuthenticated();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    clearToken();
+    navigate("/");
+  };
   return (
     <div
       style={{ height: "75px" }}
@@ -12,9 +21,29 @@ const Navbar = () => {
         <h1 className="text-4xl font-bold align-baseline hidden md:block">
           Fynd Movies
         </h1>
-        <p className="text-center align-middle md:ml-6 cursor-pointer">
-          Admin login
-        </p>
+        {auth ? (
+          <Link
+            to="/dashboard"
+            className="text-center align-middle md:ml-6 cursor-pointer"
+          >
+            Admin-dashboard
+          </Link>
+        ) : (
+          <Link
+            to="/login"
+            className="text-center align-middle md:ml-6 cursor-pointer"
+          >
+            Admin-login
+          </Link>
+        )}
+        {auth && (
+          <p
+            className="text-center align-middle md:ml-6 cursor-pointer"
+            onClick={handleLogout}
+          >
+            logout
+          </p>
+        )}
         <Search />
       </div>
     </div>
