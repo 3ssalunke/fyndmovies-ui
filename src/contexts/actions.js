@@ -1,6 +1,6 @@
 import { setToken } from "../helpers/token";
 import {
-  CLEAR_SEARCHED_MOVIES,
+  CLEAR_MOVIES,
   FETCH_MOVIES,
   LOGIN_USER,
   SET_POPULAR_MOVIES,
@@ -41,8 +41,8 @@ export const setSearchedMovies = async (dispatch, params) => {
   dispatch({ type: SET_SEARCHED_MOVIES, payload: movies });
 };
 
-export const clearSearchedMovies = (dispatch) => {
-  dispatch({ type: CLEAR_SEARCHED_MOVIES });
+export const clearMovies = (dispatch) => {
+  dispatch({ type: CLEAR_MOVIES });
   setPopularMovies(dispatch);
 };
 

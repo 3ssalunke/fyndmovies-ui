@@ -10,7 +10,10 @@ export const isAuthenticated = () => {
 
   try {
     const { exp } = jwtDecode(token);
-    if (Date.now() >= exp * 1000) return false;
+    if (Date.now() >= exp * 1000) {
+      clearToken();
+      return false;
+    }
     return true;
   } catch (error) {
     console.error(error);

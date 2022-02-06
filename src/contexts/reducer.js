@@ -1,5 +1,5 @@
 import {
-  CLEAR_SEARCHED_MOVIES,
+  CLEAR_MOVIES,
   FETCH_MOVIES,
   LOGIN_USER,
   LOGOUT_USER,
@@ -32,7 +32,7 @@ export const moviesReducer = (state, action) => {
         movies: [...action.payload],
         loading: false,
       };
-    case CLEAR_SEARCHED_MOVIES:
+    case CLEAR_MOVIES:
       return {
         ...state,
         movies: [],

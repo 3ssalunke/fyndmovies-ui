@@ -2,7 +2,7 @@ import Card from "./Card";
 
 const Container = ({ heading, data = [], handleLoadMore, loading }) => {
   return (
-    <div className="flex flex-col mt-24">
+    <div className="flex flex-col mt-20">
       <h1 className="px-10 py-3 lg:px-16 mb-5 font-semibold text-2xl w-1/3">
         {heading}
       </h1>

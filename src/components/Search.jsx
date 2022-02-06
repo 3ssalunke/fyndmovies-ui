@@ -1,26 +1,30 @@
 import { useContext } from "react";
 import { FaSearch } from "react-icons/fa";
 import { GlobalContext } from "../contexts";
-import { clearSearchedMovies, setSearchedMovies } from "../contexts/actions";
+import { clearMovies, setSearchedMovies } from "../contexts/actions";
 import debounce from "../helpers/debounce";
 
-const Search = () => {
+const Search = ({ forDashboard }) => {
   const [, dispatch] = useContext(GlobalContext);
 
   const handleSearch = debounce((e) => {
     if (e.target.value) {
       setSearchedMovies(dispatch, { searchText: e.target.value });
     } else {
-      clearSearchedMovies(dispatch);
+      clearMovies(dispatch);
     }
   }, 200);
 
   return (
-    <form className="absolute cursor-pointer right-0">
+    <form
+      className={`${
+        forDashboard ? "w-1/3 px-10" : "absolute cursor-pointer right-0"
+      }`}
+    >
       <div
-        className={
-          "bg-background h-10 w-auto rounded-full flex p-2.5 shadow-2xl relative right-0"
-        }
+        className={`bg-background w-auto rounded-full flex p-2.5 shadow-2xl relative right-0 ${
+          forDashboard ? "h-12" : "h-10"
+        } flex items-center`}
       >
         <FaSearch size={20} color="white" />
         <input
@@ -28,7 +32,9 @@ const Search = () => {
           className={
             "bg-background border-none outline-none md:max-w-3xl ml-3 text-white"
           }
-          placeholder="search for movie..."
+          placeholder={`${
+            !forDashboard ? "search for movie..." : "search movie for edit..."
+          }`}
           onChange={handleSearch}
         />
       </div>

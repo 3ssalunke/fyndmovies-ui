@@ -16,8 +16,10 @@ const PopularMovies = () => {
   };
 
   useEffect(() => {
-    setPopularMovies(dispatch);
-  }, [dispatch]);
+    if (movies.length < 30) {
+      setPopularMovies(dispatch);
+    }
+  }, [dispatch, movies]);
 
   return (
     <div className="bg-white">

@@ -3,7 +3,7 @@ import logo from "../images/logo.png";
 import { Link, useNavigate } from "react-router-dom";
 import { clearToken, isAuthenticated } from "../helpers/token";
 
-const Navbar = () => {
+const Navbar = ({ forDashboard }) => {
   const auth = isAuthenticated();
   const navigate = useNavigate();
 
@@ -46,7 +46,7 @@ const Navbar = () => {
             logout
           </p>
         )}
-        <Search />
+        {!forDashboard && <Search />}
       </div>
     </div>
   );
