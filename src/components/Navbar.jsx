@@ -18,9 +18,11 @@ const Navbar = () => {
     >
       <div className="flex justify-start items-center relative w-full">
         <img src={logo} alt="logo" className="h-10 w-10 mr-2 hidden md:block" />
-        <h1 className="text-4xl font-bold align-baseline hidden md:block">
-          Fynd Movies
-        </h1>
+        <Link to="/">
+          <h1 className="text-4xl font-bold align-baseline hidden md:block">
+            Fynd Movies
+          </h1>
+        </Link>
         {auth ? (
           <Link
             to="/dashboard"

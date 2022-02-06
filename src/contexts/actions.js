@@ -47,7 +47,7 @@ export const clearSearchedMovies = (dispatch) => {
 };
 
 export const setAdminLogin = async (dispatch, credentials) => {
-  const url = `${process.env.REACT_APP_API_LOCALHOST}/admin/signin`;
+  const url = `${process.env.REACT_APP_API_HOSTNAME}/admin/signin`;
   const res = await fetch(url, {
     method: "POST",
     body: JSON.stringify(credentials),
