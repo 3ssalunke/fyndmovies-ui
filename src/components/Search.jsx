@@ -22,16 +22,15 @@ const Search = ({ forDashboard }) => {
       }`}
     >
       <div
-        className={`bg-background w-auto rounded-full flex p-2.5 shadow-2xl relative right-0 ${
+        className={`bg-background w-full rounded-full flex p-2.5 shadow-2xl relative right-0 ${
           forDashboard ? "h-12" : "h-10"
         } flex items-center`}
       >
         <FaSearch size={20} color="white" />
         <input
           autoComplete="off"
-          className={
-            "bg-background border-none outline-none md:max-w-3xl ml-3 text-white"
-          }
+          className={`bg-background border-none outline-none ml-3 text-white w-full
+          }`}
           placeholder={`${
             !forDashboard ? "search for movie..." : "search movie for edit..."
           }`}
