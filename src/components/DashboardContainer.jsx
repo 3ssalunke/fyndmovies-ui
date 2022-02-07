@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { MdOutlineAdd } from "react-icons/md";
-import AddMovieForm from "./AddMovieForm";
+import AddMovieModal from "./AddMovieModal";
 import DashboardCard from "./DashboardCard";
 import Search from "./Search";
 
@@ -32,7 +32,7 @@ const DashboardContainer = ({ heading, data = [] }) => {
           </div>
         </div>
         {openAddMovieModal && (
-          <AddMovieForm setAddMovieModal={setOpenAddMovieModal} />
+          <AddMovieModal setAddMovieModal={setOpenAddMovieModal} />
         )}
         <div className="w-full px-10 mt-5 mb-16 flex flex-col justify-center">
           {data?.map((item, index) => (

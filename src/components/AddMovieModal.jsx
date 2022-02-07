@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { getToken } from "../helpers/token";
 
-const AddMovieForm = ({ setOpenAddMovieModal }) => {
+const AddMovieModal = ({ setOpenAddMovieModal }) => {
   const nameRef = useRef(null);
   const directorRef = useRef(null);
   const imdbScoreRef = useRef(null);
@@ -165,4 +165,4 @@ const AddMovieForm = ({ setOpenAddMovieModal }) => {
   );
 };
 
-export default AddMovieForm;
+export default AddMovieModal;
