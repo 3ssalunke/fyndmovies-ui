@@ -25,14 +25,14 @@ const DashboardCard = ({ item }) => {
 
   return (
     <>
-      <div className="py-2 px-1 border-b-2 flex items-center relative">
-        <div className="w-2/3 flex items-center">
+      <div className="py-2 px-1 border-b-2 flex flex-col md:flex-row items-center relative">
+        <div className="w-full md:w-2/3 flex flex-col md:flex-row items-center">
           <h1 className="text-xl font-medium">{item.name}</h1>
           <p className="ml-4">
             Directed By <span>{item.director}</span>
           </p>
         </div>
-        <div className="flex items-center justify-star w-1/3">
+        <div className="flex items-center justify-between md:justify-start w-full md:w-1/3">
           <div className="p-2 rounded-lg border-2 border-black mr-1">
             <button
               onClick={() => setOpenEditModal((prev) => !prev)}

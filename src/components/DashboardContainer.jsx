@@ -9,13 +9,13 @@ const DashboardContainer = ({ heading, data = [] }) => {
   return (
     <>
       <div className="flex flex-col mt-20">
-        <h1 className="px-10 py-3 lg:px-16 mb-5 font-semibold text-2xl w-1/3">
+        <h1 className="px-5 md:px-10 py-3 lg:px-16 mb-5 font-semibold text-2xl w-full md:w-1/3">
           {heading}
         </h1>
         <div className="flex flex-col">
-          <div className="flex items-center justify-evenly">
+          <div className="flex flex-col md:flex-row items-center justify-evenly ">
             <Search forDashboard={true} />
-            <div className="bg-background flex items-center w-1/4 px-10 h-12 justify-center rounded-full shadow-2xl cursor-pointer">
+            <div className="bg-background flex items-center w-2/3 px-5 md:w-1/4 md:px-10 h-12 justify-center rounded-full shadow-2xl cursor-pointer">
               <MdOutlineAdd
                 fontWeight={50}
                 size={20}

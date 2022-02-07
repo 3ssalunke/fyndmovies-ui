@@ -56,7 +56,7 @@ const EditMovieModal = ({ setOpenEditModal, item }) => {
   };
 
   return (
-    <div className="absolute w-1/2 bg-white top-0 left-1/4 z-50 shadow-xl">
+    <div className="fixed w-full md:w-1/2 bg-white top-5 md:top-0 left -0 md:left-1/4 z-50 shadow-xl">
       <p
         className="absolute top-1 right-2 font-medium cursor-pointer"
         onClick={() => setOpenEditModal((prev) => !prev)}

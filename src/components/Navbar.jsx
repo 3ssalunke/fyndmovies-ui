@@ -33,14 +33,14 @@ const Navbar = ({ forDashboard }) => {
         ) : (
           <Link
             to="/login"
-            className="text-center align-middle md:ml-6 cursor-pointer"
+            className="text-center align-middle ml-6 cursor-pointer"
           >
             Admin-login
           </Link>
         )}
         {auth && (
           <p
-            className="text-center align-middle md:ml-6 cursor-pointer"
+            className="text-center align-middle ml-6 cursor-pointer"
             onClick={handleLogout}
           >
             logout

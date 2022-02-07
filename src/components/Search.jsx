@@ -18,7 +18,9 @@ const Search = ({ forDashboard }) => {
   return (
     <form
       className={`${
-        forDashboard ? "w-1/3 px-10" : "absolute cursor-pointer right-0"
+        forDashboard
+          ? "w-full px-5 mb-1 md:mb-0 md:w-1/3 md:px-10"
+          : "w-1/2 md:w-auto absolute cursor-pointer right-0"
       }`}
     >
       <div

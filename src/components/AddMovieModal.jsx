@@ -59,7 +59,7 @@ const AddMovieModal = ({ setOpenAddMovieModal }) => {
   };
 
   return (
-    <div className="absolute w-1/2 bg-white top-1/5 left-1/4 z-50 shadow-xl">
+    <div className="fixed w-full md:w-1/2 bg-white  top-1/5 left-0 md:left-1/4 z-50 shadow-xl">
       <p
         className="absolute top-1 right-2 font-medium cursor-pointer"
         onClick={() => setOpenAddMovieModal((prev) => !prev)}
