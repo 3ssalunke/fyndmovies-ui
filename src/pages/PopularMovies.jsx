@@ -16,7 +16,7 @@ const PopularMovies = () => {
   };
 
   useEffect(() => {
-    if (movies.length < 30) {
+    if (movies.length === 0) {
       setPopularMovies(dispatch);
     }
   }, [dispatch, movies]);
