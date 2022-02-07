@@ -32,7 +32,7 @@ const DashboardContainer = ({ heading, data = [] }) => {
           </div>
         </div>
         {openAddMovieModal && (
-          <AddMovieModal setAddMovieModal={setOpenAddMovieModal} />
+          <AddMovieModal setOpenAddMovieModal={setOpenAddMovieModal} />
         )}
         <div className="w-full px-10 mt-5 mb-16 flex flex-col justify-center">
           {data?.map((item, index) => (
