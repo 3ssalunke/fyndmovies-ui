@@ -113,7 +113,11 @@ const AddMovieForm = ({ setAddMovieModal }) => {
                 <option disabled>Select Genres</option>
                 {genres.length &&
                   genres.map((genre, index) => (
-                    <option key={index} value={genre}>
+                    <option
+                      className="cursor-pointer"
+                      key={index}
+                      value={genre}
+                    >
                       {genre}
                     </option>
                   ))}
@@ -127,6 +131,7 @@ const AddMovieForm = ({ setAddMovieModal }) => {
               </label>
               <input
                 type="number"
+                step="0.01"
                 id="imdb"
                 ref={imdbScoreRef}
                 className="p-2 text-lg w-full h-10 rounded-md border-2 outline-none"

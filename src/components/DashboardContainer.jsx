@@ -1,14 +1,10 @@
 import { useState } from "react";
 import { MdOutlineAdd } from "react-icons/md";
 import AddMovieForm from "./AddMovieForm";
+import DashboardCard from "./DashboardCard";
 import Search from "./Search";
 
-const DashboardContainer = ({
-  heading,
-  data = [],
-  handleLoadMore,
-  loading,
-}) => {
+const DashboardContainer = ({ heading, data = [] }) => {
   const [addMovieModal, setAddMovieModal] = useState(false);
   return (
     <>
@@ -35,8 +31,13 @@ const DashboardContainer = ({
             </div>
           </div>
         </div>
+        {addMovieModal && <AddMovieForm setAddMovieModal={setAddMovieModal} />}
+        <div className="w-full px-10 mt-5 mb-16 flex flex-col justify-center">
+          {data?.map((item, index) => (
+            <DashboardCard item={item} key={index} />
+          ))}
+        </div>
       </div>
-      {addMovieModal && <AddMovieForm setAddMovieModal={setAddMovieModal} />}
     </>
   );
 };
