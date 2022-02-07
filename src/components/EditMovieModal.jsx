@@ -1,12 +1,11 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { getToken } from "../helpers/token";
 
-const AddMovieForm = ({ setOpenAddMovieModal }) => {
-  const nameRef = useRef(null);
-  const directorRef = useRef(null);
-  const imdbScoreRef = useRef(null);
-  const populatityRef = useRef(null);
-  const [selectedGenres, setSelectedGenres] = useState([]);
+const EditMovieModal = ({ setOpenEditModal, item }) => {
+  const [director, setDirector] = useState(item.director);
+  const [imdbScore, setImdbScore] = useState(item.imdb_score);
+  const [popularity, setPopularity] = useState(item["99popularity"]);
+  const [selectedGenres, setSelectedGenres] = useState([...item.genre]);
   const [genres, setGenres] = useState([]);
 
   useEffect(() => {
@@ -36,39 +35,37 @@ const AddMovieForm = ({ setOpenAddMovieModal }) => {
     e.preventDefault();
     (async function () {
       const movieData = {
-        "99popularity": populatityRef.current.value,
-        name:
-          nameRef.current.value.charAt(0).toUpperCase() +
-          nameRef.current.value.slice(1),
-        imdb_score: imdbScoreRef.current.value,
-        director:
-          directorRef.current.value.charAt(0).toUpperCase() +
-          directorRef.current.value.slice(1),
+        "99popularity": popularity,
+        imdb_score: imdbScore,
+        director: director.charAt(0).toUpperCase() + director.slice(1),
         genre: [...selectedGenres],
       };
-      await fetch(`${process.env.REACT_APP_API_HOSTNAME}/admin/movie`, {
-        method: "POST",
-        headers: new Headers({
-          Authorization: "Bearer " + getToken(),
-          "Content-Type": "application/json",
-        }),
-        body: JSON.stringify(movieData),
-      });
-      setOpenAddMovieModal(false);
+      await fetch(
+        `${process.env.REACT_APP_API_HOSTNAME}/admin/movie/${item._id}`,
+        {
+          method: "PUT",
+          headers: new Headers({
+            Authorization: "Bearer " + getToken(),
+            "Content-Type": "application/json",
+          }),
+          body: JSON.stringify(movieData),
+        }
+      );
+      setOpenEditModal(false);
     })();
   };
 
   return (
-    <div className="absolute w-1/2 bg-white top-1/5 left-1/4 z-50 shadow-xl">
+    <div className="absolute w-1/2 bg-white top-0 left-1/4 z-50 shadow-xl">
       <p
         className="absolute top-1 right-2 font-medium cursor-pointer"
-        onClick={() => setOpenAddMovieModal((prev) => !prev)}
+        onClick={() => setOpenEditModal((prev) => !prev)}
       >
         X
       </p>
       <form onSubmit={handleSubmit}>
         <h1 className="py-2 px-4 text-2xl font-medium text-center">
-          Add Movie
+          Edit Movie
         </h1>
         <div className="flex items-center w-full">
           <div className="w-1/2">
@@ -79,11 +76,11 @@ const AddMovieForm = ({ setOpenAddMovieModal }) => {
               <input
                 type="text"
                 id="text"
-                ref={nameRef}
+                value={item.name}
                 autoComplete="off"
                 autoCapitalize="off"
                 className="p-2 text-lg w-full h-10 rounded-md border-2 outline-none"
-                required
+                disabled
               />
             </div>
             <div className="mb-5 mx-2 flex flex-col items-start justify-start">
@@ -93,7 +90,8 @@ const AddMovieForm = ({ setOpenAddMovieModal }) => {
               <input
                 type="text"
                 id="director"
-                ref={directorRef}
+                value={director}
+                onChange={(e) => setDirector(e.target.value)}
                 autoComplete="off"
                 autoCapitalize="off"
                 className="p-2 text-lg w-full h-10 rounded-md border-2 outline-none"
@@ -133,7 +131,8 @@ const AddMovieForm = ({ setOpenAddMovieModal }) => {
                 type="number"
                 step="0.01"
                 id="imdb"
-                ref={imdbScoreRef}
+                value={imdbScore}
+                onChange={(e) => setImdbScore(e.target.value)}
                 className="p-2 text-lg w-full h-10 rounded-md border-2 outline-none"
                 required
               />
@@ -145,7 +144,8 @@ const AddMovieForm = ({ setOpenAddMovieModal }) => {
               <input
                 type="number"
                 id="popularity"
-                ref={populatityRef}
+                value={popularity}
+                onChange={(e) => setPopularity(e.target.value)}
                 className="p-2 text-lg w-full h-10 rounded-md border-2 outline-none"
                 required
               />
@@ -165,4 +165,4 @@ const AddMovieForm = ({ setOpenAddMovieModal }) => {
   );
 };
 
-export default AddMovieForm;
+export default EditMovieModal;

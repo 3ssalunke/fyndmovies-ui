@@ -5,7 +5,7 @@ import DashboardCard from "./DashboardCard";
 import Search from "./Search";
 
 const DashboardContainer = ({ heading, data = [] }) => {
-  const [addMovieModal, setAddMovieModal] = useState(false);
+  const [openAddMovieModal, setOpenAddMovieModal] = useState(false);
   return (
     <>
       <div className="flex flex-col mt-20">
@@ -24,14 +24,16 @@ const DashboardContainer = ({ heading, data = [] }) => {
               />
               <p
                 className="text-white font-normal"
-                onClick={() => setAddMovieModal((prev) => !prev)}
+                onClick={() => setOpenAddMovieModal((prev) => !prev)}
               >
                 Add New Movie
               </p>
             </div>
           </div>
         </div>
-        {addMovieModal && <AddMovieForm setAddMovieModal={setAddMovieModal} />}
+        {openAddMovieModal && (
+          <AddMovieForm setAddMovieModal={setOpenAddMovieModal} />
+        )}
         <div className="w-full px-10 mt-5 mb-16 flex flex-col justify-center">
           {data?.map((item, index) => (
             <DashboardCard item={item} key={index} />
