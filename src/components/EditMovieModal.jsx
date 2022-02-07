@@ -5,6 +5,7 @@ const EditMovieModal = ({ setOpenEditModal, item }) => {
   const [director, setDirector] = useState(item.director);
   const [imdbScore, setImdbScore] = useState(item.imdb_score);
   const [popularity, setPopularity] = useState(item["99popularity"]);
+  const [customGenres, setCustomGenres] = useState("");
   const [selectedGenres, setSelectedGenres] = useState([...item.genre]);
   const [genres, setGenres] = useState([]);
 
@@ -33,12 +34,20 @@ const EditMovieModal = ({ setOpenEditModal, item }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const addedGenres = customGenres
+      ?.split(",")
+      .filter((val) => val.trim() && val !== "")
+      .map((val) => val.charAt(0).toUpperCase() + val.slice(1));
+    const genre =
+      addedGenres.length > 0
+        ? [...selectedGenres, ...addedGenres]
+        : [...selectedGenres];
     (async function () {
       const movieData = {
         "99popularity": popularity,
         imdb_score: imdbScore,
         director: director.charAt(0).toUpperCase() + director.slice(1),
-        genre: [...selectedGenres],
+        genre,
       };
       await fetch(
         `${process.env.REACT_APP_API_HOSTNAME}/admin/movie/${item._id}`,
@@ -148,6 +157,21 @@ const EditMovieModal = ({ setOpenEditModal, item }) => {
                 onChange={(e) => setPopularity(e.target.value)}
                 className="p-2 text-lg w-full h-10 rounded-md border-2 outline-none"
                 required
+              />
+            </div>
+            <div className="mb-5 mx-2 flex flex-col items-start justify-start">
+              <label htmlFor="popularity" className="text-xl font-medium">
+                Add Genre
+              </label>
+              <input
+                type="text"
+                id="text"
+                value={customGenres}
+                onChange={(e) => setCustomGenres(e.target.value)}
+                placeholder="add genre seperated by commas..."
+                autoComplete="off"
+                autoCapitalize="off"
+                className="p-2 text-lg w-full h-10 rounded-md border-2 outline-none"
               />
             </div>
           </div>

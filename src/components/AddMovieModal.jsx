@@ -6,6 +6,7 @@ const AddMovieModal = ({ setOpenAddMovieModal }) => {
   const directorRef = useRef(null);
   const imdbScoreRef = useRef(null);
   const populatityRef = useRef(null);
+  const [customGenres, setCustomGenres] = useState("");
   const [selectedGenres, setSelectedGenres] = useState([]);
   const [genres, setGenres] = useState([]);
 
@@ -34,6 +35,14 @@ const AddMovieModal = ({ setOpenAddMovieModal }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const addedGenres = customGenres
+      ?.split(",")
+      .filter((val) => val.trim() && val !== "")
+      .map((val) => val.charAt(0).toUpperCase() + val.slice(1));
+    const genre =
+      addedGenres.length > 0
+        ? [...selectedGenres, ...addedGenres]
+        : [...selectedGenres];
     (async function () {
       const movieData = {
         "99popularity": populatityRef.current.value,
@@ -44,7 +53,7 @@ const AddMovieModal = ({ setOpenAddMovieModal }) => {
         director:
           directorRef.current.value.charAt(0).toUpperCase() +
           directorRef.current.value.slice(1),
-        genre: [...selectedGenres],
+        genre,
       };
       await fetch(`${process.env.REACT_APP_API_HOSTNAME}/admin/movie`, {
         method: "POST",
@@ -105,7 +114,6 @@ const AddMovieModal = ({ setOpenAddMovieModal }) => {
                 Genres
               </label>
               <select
-                required
                 onChange={handleGenreSelect}
                 multiple
                 className="w-full outline-none"
@@ -148,6 +156,21 @@ const AddMovieModal = ({ setOpenAddMovieModal }) => {
                 ref={populatityRef}
                 className="p-2 text-lg w-full h-10 rounded-md border-2 outline-none"
                 required
+              />
+            </div>
+            <div className="mb-5 mx-2 flex flex-col items-start justify-start">
+              <label htmlFor="popularity" className="text-xl font-medium">
+                Add Genre
+              </label>
+              <input
+                type="text"
+                id="text"
+                value={customGenres}
+                onChange={(e) => setCustomGenres(e.target.value)}
+                placeholder="add genre seperated by commas..."
+                autoComplete="off"
+                autoCapitalize="off"
+                className="p-2 text-lg w-full h-10 rounded-md border-2 outline-none"
               />
             </div>
           </div>
